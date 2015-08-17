@@ -1,4 +1,7 @@
 $(document).ready(function(){
-  // code in here!
-  console.log("here's your data:", mockData)
+  console.log("here's your mock data to start with:")
+  console.log(GLOBAL_MOCK_DATA_OBJECT)
+
+  // can you render the mock data to the page?
+
 })
