@@ -27,13 +27,13 @@ function loadMoar(){
 function getAndRenderGifs(search_term, offset){
   var url = buildRequestUrl(search_term, offset);
   $.get(url, function(response){
-  
+
     if (offset === 0){
       $("img").remove();
     }
 
     response.data.forEach(function(v,i){
-      $("#gif-gallery").append($("<img>").attr("src", v.images.fixed_height.url))
+      $("#gif-gallery").prepend($("<img>").attr("src", v.images.fixed_height.url))
     });
 
   });
