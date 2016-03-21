@@ -8,7 +8,7 @@ $(document).ready(function(){
     getAndRenderGifs();
   });
 
-  $(".load-more").on('click', loadMoar);
+  $(".load-moar").on('click', loadMoar);
 });
 
 function getAndRenderGifs() {
