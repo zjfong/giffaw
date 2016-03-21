@@ -1,14 +1,14 @@
 var giphy_api_endpoint = "http://api.giphy.com/v1/gifs/search";
 var offset = 0;
-var returnKeyCode = 13;
+var returnKeyCode = 13; //13 is the enter key
 var search_term = "cats";
 
 
 $(document).ready(function(){
   getAndRenderGifs(search_term);
-  $("input").keypress(evaluateSearch);
-  $("button").click(loadMoar);
-})
+  $(".gif-input").keypress(evaluateSearch);
+  $(".load-more").click(loadMoar);
+});
 
 function evaluateSearch(event){
   var $input = $(this);
@@ -32,15 +32,20 @@ function getAndRenderGifs(search_term, offset){
     api_key: "dc6zaTOxFJmzC"
   };
 
-  $.get(giphy_api_endpoint, query_data, function(response){
-
-    if (offset === 0){
-      $("img").remove();
+  $.ajax({
+    method: "GET",
+    url: giphy_api_endpoint,
+    data: query_data,
+    success: function(response){
+      if (offset === 0){
+        $(".gif-img").remove();
+      }
+      response.data.forEach(function(v,i){
+        $(".gif-gallery").append($("<img class='img-responsive img-thumbnail gif-img' src="+v.images.fixed_height.url+">"));
+      });
+    },
+    error: function() {
+      console.log(":(");
     }
-
-    response.data.forEach(function(v,i){
-      $("#gif-gallery").prepend($("<img>").attr("src", v.images.fixed_height.url))
-    });
-
   });
 }

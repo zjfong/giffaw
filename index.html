@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    	<meta charset="utf-8">
-		  <title>Giffaw</title>
-		
-		<!-- CSS -->
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/styles.css">
+    <meta charset="utf-8">
+		<!-- set viewport to device width to allow responsiveness -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Bootstrap CDN -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="styles/styles.css">
 
     <!-- JS -->
-		<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="mock_data.js"></script>
-    <script src="base.js"></script>
+		<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="scripts/mock_data.js"></script>
+    <script src="scripts/app.js"></script>
+
+		<title>Giffaw</title>
+
 	</head>
 	<body id="sanity-check">
-    <input type="text" placeholder="search gifs">
-    <p id='gif-gallery'></p>
-    <button>MOAR</button>
+		<div class="container">
+			<h1 class="text-center">Giffaw</h1>
+			<div class="row">
+				<div class="col-sm-4">
+					<input type="text" class="form-control gif-input" placeholder="search gifs">
+				</div>
+				<div class="col-sm-8">
+					<div class="gif-gallery"></div>
+					<button class="btn btn-primary load-more">LOAD MOAR</button>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
