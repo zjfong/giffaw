@@ -15,10 +15,9 @@ Your site should look something like:
 ![desktop layout](https://cloud.githubusercontent.com/assets/3010270/13936044/2ffadf60-ef78-11e5-95c5-55b8aefe68d6.png)
 
 Solution in the `solution` branch. Load More button solution in the `solution-more` branch.
-
-	```
+```
 	git checkout solution
-	```
+```
 OR just view in the browser by selecting the branch you want from the branch dropdown.
 
 ## Introduction
