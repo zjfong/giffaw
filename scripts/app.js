@@ -1,51 +1,44 @@
-var giphy_api_endpoint = "http://api.giphy.com/v1/gifs/search";
-var offset = 0;
-var returnKeyCode = 13; //13 is the enter key
-var search_term = "cats";
-
+var giphy_api = "http://api.giphy.com/v1/gifs/search";
 
 $(document).ready(function(){
-  getAndRenderGifs(search_term);
-  $(".gif-input").keypress(evaluateSearch);
+  $("form").on("submit", function(e) {
+    e.preventDefault();
+    
+    $("form [name='offset']").val(0);
+    getAndRenderGifs();
+  });
+
   $(".load-more").click(loadMoar);
 });
 
-function evaluateSearch(event){
-  var $input = $(this);
-  search_term = $input.val();
-  if(event.keyCode === returnKeyCode && search_term){
-    offset = 0;
-    getAndRenderGifs(search_term, offset);
+function getAndRenderGifs() {
+  $.ajax({
+    method: "GET",
+    url: giphy_api,
+    data: $("form").serialize(),
+    success: onSuccess,
+    error: onError
+  });
+}
+
+function onSuccess(json) {
+  if (json.pagination.offset === 0) {
+    $(".gif-img").remove();
   }
+  json.data.forEach(function(v,i){
+    $(".gif-gallery").append($("<img class='img-responsive img-thumbnail gif-img' src="+v.images.fixed_height.url+">"));
+  });
+}
+
+function onError(xhr, status, errorThrown) {
+  alert("Sorry, there was a problem!");
+  console.log("Error: " + errorThrown);
+  console.log("Status: " + status);
+  console.dir(xhr);
 }
 
 function loadMoar(){
-  offset += 25;
-  getAndRenderGifs(search_term, offset)
-}
-
-function getAndRenderGifs(search_term, offset){
-
-  var query_data = {
-    q: search_term,
-    offset: offset || 0,
-    api_key: "dc6zaTOxFJmzC"
-  };
-
-  $.ajax({
-    method: "GET",
-    url: giphy_api_endpoint,
-    data: query_data,
-    success: function(response){
-      if (offset === 0){
-        $(".gif-img").remove();
-      }
-      response.data.forEach(function(v,i){
-        $(".gif-gallery").append($("<img class='img-responsive img-thumbnail gif-img' src="+v.images.fixed_height.url+">"));
-      });
-    },
-    error: function() {
-      console.log(":(");
-    }
-  });
+  var newOffset = parseInt($("form [name='offset']").val()) + 25;
+  $("form [name='offset']").val(newOffset);
+  getAndRenderGifs();
 }
