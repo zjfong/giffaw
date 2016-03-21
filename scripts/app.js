@@ -1,6 +1,9 @@
 var giphy_api = "http://api.giphy.com/v1/gifs/search";
 
-$(document).ready(function(){
+$(document).on("ready", function(){
+  // gets gifs on page load
+  getAndRenderGifs();
+
   $("form").on("submit", function(e) {
     e.preventDefault();
 
@@ -8,7 +11,7 @@ $(document).ready(function(){
     getAndRenderGifs();
   });
 
-  $(".load-moar").on('click', loadMoar);
+  $(".load-moar").on("click", loadMoar);
 });
 
 function getAndRenderGifs() {
