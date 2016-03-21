@@ -10,11 +10,9 @@ Basic Requirements:
 * A user can search for gifs, using the input field
 * Bonus: A user can "load more" gifs
 
-> ***Note:*** _This can be a pair programming activity or done independently._
-
 Your site should look something like:
 
-![desktop layout](/layout_goal.png)
+![desktop layout](https://cloud.githubusercontent.com/assets/3010270/13929696/ae3ca810-ef58-11e5-934a-cb8beb8bfb32.png)
 
 # Using AJAX
 
