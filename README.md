@@ -42,7 +42,7 @@ Here's some steps to follow to help get you in this mindset:
 	- Don't spend much time on this. You will go back to figure out things as they come up.
 
 2. Test the API out using 'curl'!
-  - curl is a *nix utility that simply fetches a URL.  Test it out by running `curl http://jquery.com` in the console.  Is this HTML?
+  - curl is a unix utility that simply fetches a URL.  Test it out by running `curl http://jquery.com` in the console.  Is this HTML?
 	- Try http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC
 	- What did you get back? It looks like a mess! Is it HTML?  But that is because it isn't meant to come back human-readable. Its just a JSON Object!
 
@@ -50,13 +50,12 @@ Here's some steps to follow to help get you in this mindset:
 	- Skim this explanation of AJAX using jQuery: http://www.sitepoint.com/use-jquerys-ajax-function/
 	- Pay extra attention to the example. Think about what you would change to GET the data you want from the URL you want.
 
-4. Start playing in your base.js file. You want an Ajax call to fire when your page has loaded, so you won't be putting your ajax in an `$().on('click'`!
+4. Start playing in your scripts/app.js file. You want an Ajax call to fire when your page has loaded, so you won't be putting your ajax in an `$().on('click')`!
 	- Don't try to do everything at once! First try to log the data to the console! Then work on logging specific data you want. What do you need to get the gifs to actually load on the page? There is a bunch of stuff in this data object, and this is actually not a trivial question.
 	- Once you narrowed that down, THEN you want to build functions that generate HTML Strings.
 	- First log those strings to the console, and make sure they look like you think they should. THEN append them into the DOM!
-	- Don't forget about your friend the javaScript 'debugger' keyword. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger
 
-5. Can you bonus? Get a little search box to make a different AJAX call to the search URL.
+5. Can you bonus? Get the input box to make a different AJAX call to the search URL.
 	- Does a search box button have a default action? What do we want do with that?
 	- Are we just appending more and more gifs to the dom? Do we need to clear previous gifs before loading more?
 	- OMG are you making a one page app using AJAX like a boss?
