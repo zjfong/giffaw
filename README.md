@@ -8,13 +8,18 @@ Basic Requirements:
 
 * A user can see the top 25 gifs (on page load)
 * A user can search for gifs, using the input field
-* Bonus: A user can "load more" gifs
+* Super Bonus: A user can "load more" gifs
 
 Your site should look something like:
 
-![desktop layout](https://cloud.githubusercontent.com/assets/3010270/13929696/ae3ca810-ef58-11e5-934a-cb8beb8bfb32.png)
+![desktop layout](https://cloud.githubusercontent.com/assets/3010270/13936044/2ffadf60-ef78-11e5-95c5-55b8aefe68d6.png)
 
-# Using AJAX
+Solution in the `solution` branch. Load More button solution in the `solution-more` branch.
+
+	```
+	git checkout solution
+	```
+OR just view in the browser by selecting the branch you want from the branch dropdown.
 
 ## Introduction
 
@@ -34,25 +39,56 @@ This is one of the major skills for web development!
 
 Here's some steps to follow to help get you in this mindset:
 
-1. Skim the docs! https://github.com/Giphy/GiphyAPI
-	- Pay extra attention to the sections we will be using,
-		- trending: https://github.com/Giphy/GiphyAPI#trending-gifs-endpoint
-		- search: https://github.com/Giphy/GiphyAPI#search-endpoint
-		- Also note the ever-important API Key situation (We will be using the Public Beta API key): https://github.com/Giphy/GiphyAPI#public-beta-key
-	- Don't spend much time on this. You will go back to figure out things as they come up.
+1. Familiarize yourself with the [docs](https://github.com/Giphy/GiphyAPI)
+	- Specifically, we will be using the [search endpoint](https://github.com/Giphy/GiphyAPI#search-endpoint)
+		- Also note the ever-important API Key situation (We will be using the [Public Beta API key](https://github.com/Giphy/GiphyAPI#public-beta-key))
 
-2. Test the API out using 'curl'!
-  - curl is a unix utility that simply fetches a URL.  Test it out by running `curl http://jquery.com` in the console.  Is this HTML?
-	- Try http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC
-	- What did you get back? It looks like a mess! Is it HTML?  But that is because it isn't meant to come back human-readable. Its just a JSON Object!
+2. Test the API out in your browser!
+	- Go to http://api.giphy.com/v1/gifs/search?q=cats&api_key=dc6zaTOxFJmzC. This is the API request for the search term `cats`.
+	- What do you see? It's a JSON Object! But it looks like a mess!
+	- Add the JSONView plugin to Chrome. Find it [here](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc). Now refresh the API link above. Not such a mess anymore...
 
-3. Crack open your blank template. We first want to write JavaScript that returns that same object we got back using curl when we open our index.html! BUT HOW DO I AJAX!!??
-	- Skim this explanation of AJAX using jQuery: http://www.sitepoint.com/use-jquerys-ajax-function/
-	- Pay extra attention to the example. Think about what you would change to GET the data you want from the URL you want.
+3. Clone this project. We first want to write jQuery that returns and `console.log()`s that same object we saw when we opened the API in our browser. BUT HOW DO I AJAX!!??
+	- Look at this example of an `$.ajax` request:
+	```js
+	$.ajax({
 
-4. Start playing in your scripts/app.js file. You want an Ajax call to fire when your page has loaded, so you won't be putting your ajax in an `$().on('click')`!
-	- Don't try to do everything at once! First try to log the data to the console! Then work on logging specific data you want. What do you need to get the gifs to actually load on the page? There is a bunch of stuff in this data object, and this is actually not a trivial question.
-	- Once you narrowed that down, THEN you want to build functions that generate HTML Strings.
+		// What kind of request
+		method: "GET",
+
+		// The URL for the request
+		url: "http://api.api.com/search",
+
+		// The data to send aka query parameters
+		data: $("form").serialize(),
+
+		// Code to run if the request succeeds;
+		// the response is passed to the function
+		success: onSuccess,
+
+		// Code to run if the request fails; the raw request and
+		// status codes are passed to the function
+		error: onError
+	});
+
+	function onSuccess( json ) {
+		$("div").append("<h1>"+json.title+"</h1>");
+	}
+
+	function onError(xhr, status, errorThrown) {
+		alert("Sorry, there was a problem!");
+		console.log("Error: " + errorThrown);
+		console.log("Status: " + status);
+		console.dir(xhr);
+	}
+	```
+	- How would you repurpose this to GET the data you want from the URL you want.
+		- What is your base API url? What are the query parameters?
+		- HINT: you need to `serialize()` your form data.
+
+4. Start playing in your scripts/app.js file.
+	- Your first step is to make an Ajax call fire when your page loads. Don't try to do everything at once! First try to log the data to the console. Then work on logging specific data you want. What do you need to get the gifs to actually load on the page? There is a bunch of stuff in this data object and you need to figure out what you need.
+	- Once you narrowed that down, THEN you want to build functions that generate HTML Strings and `append()` them to the page.
 	- First log those strings to the console, and make sure they look like you think they should. THEN append them into the DOM!
 
 5. Can you bonus? Get the input box to make a different AJAX call to the search URL.
@@ -60,9 +96,8 @@ Here's some steps to follow to help get you in this mindset:
 	- Are we just appending more and more gifs to the dom? Do we need to clear previous gifs before loading more?
 	- OMG are you making a one page app using AJAX like a boss?
 
-#### Deliverable
-
-Take a screenshot of your app and post it to Funny Biz!
+6. Can you super bonus? Add a `Load More` button that, when clicked, appends 25 more gifs to the bottom of the page.
+	- You will need to make use of the `offset` query parameter. See [Search Endpoint](https://github.com/Giphy/GiphyAPI#search-endpoint) section for more information.
 
 ## Additional Resources
 
