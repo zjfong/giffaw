@@ -7,11 +7,8 @@ $(document).on("ready", function(){
   $("form").on("submit", function(e) {
     e.preventDefault();
 
-    $("form [name='offset']").val(0);
     getAndRenderGifs();
   });
-
-  $(".load-moar").on("click", loadMoar);
 });
 
 function getAndRenderGifs() {
@@ -25,9 +22,7 @@ function getAndRenderGifs() {
 }
 
 function onSuccess(json) {
-  if (json.pagination.offset === 0) {
-    $(".gif-img").remove();
-  }
+  $(".gif-img").remove();
   json.data.forEach(function(v,i){
     $(".gif-gallery").append($("<img class='img-responsive img-thumbnail gif-img' src="+v.images.fixed_height.url+">"));
   });
@@ -38,10 +33,4 @@ function onError(xhr, status, errorThrown) {
   console.log("Error: " + errorThrown);
   console.log("Status: " + status);
   console.dir(xhr);
-}
-
-function loadMoar(){
-  var newOffset = parseInt($("form [name='offset']").val()) + 25;
-  $("form [name='offset']").val(newOffset);
-  getAndRenderGifs();
 }
