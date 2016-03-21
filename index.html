@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 		<!-- Custom CSS -->
-		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="styles/styles.css">
 
     <!-- JS -->
 		<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
@@ -23,8 +23,12 @@
 		<div class="container">
 			<h1 class="text-center">Giffaw</h1>
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<input type="text" class="form-control" placeholder="search gifs">
+				<div class="col-sm-4">
+					<input type="text" class="form-control gif-input" placeholder="search gifs">
+				</div>
+				<div class="col-sm-8">
+					<div class="gif-gallery"></div>
+					<button class="btn btn-primary load-more">LOAD MOAR</button>
 				</div>
 			</div>
 		</div>
