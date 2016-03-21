@@ -3,12 +3,12 @@ var giphy_api = "http://api.giphy.com/v1/gifs/search";
 $(document).ready(function(){
   $("form").on("submit", function(e) {
     e.preventDefault();
-    
+
     $("form [name='offset']").val(0);
     getAndRenderGifs();
   });
 
-  $(".load-more").click(loadMoar);
+  $(".load-more").on('click', loadMoar);
 });
 
 function getAndRenderGifs() {
