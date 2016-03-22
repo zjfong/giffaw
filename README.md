@@ -70,7 +70,7 @@ Here's some steps to follow to help get you in this mindset:
 		error: onError
 	});
 
-	function onSuccess( json ) {
+	function onSuccess(json) {
 		$("div").append("<h1>"+json.title+"</h1>");
 	}
 
